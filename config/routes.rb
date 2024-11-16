@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   get "checkout", to: "home#checkout"
   get "contact", to: "home#contact"
   get "error", to: "home#error"
-  get "index", to: "home#index"
   get "index_2", to: "home#index_2"
   get "index-light", to: "home#index-light"
   get "index_2_light", to: "home#index_2_light"
