@@ -31,31 +31,31 @@ CSS TABLE OF CONTENTS
     4.04 --> footer
 
 ------------------------------------------------------------------*/
-
 // Google fonts ***
 @import url("https://fonts.googleapis.com/css2?family=Prosto+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap");
 
-// Abstracts styles ***
-@import "_abstracts/_mixins";
-@import "_abstracts/_variables";
+// Abstract styles ***
+@import "abstracts/mixins";
+@import "abstracts/variables";
 
-// Typography styles***
-@import "_base/_typography";
+// Typography styles ***
+@import "base/typography";
 
 // Component styles ***
-@import "_components/_buttons";
-@import "_components/_progress";
-@import "_components/_title";
+@import "components/buttons";
+@import "components/progress";
+@import "components/title";
 
 // Layout styles ***
-@import "_layout/_header";
-@import "_layout/_banner";
-@import "_layout/_section";
-@import "_layout/_footer";
+@import "layout/header";
+@import "layout/banner";
+@import "layout/section";
+@import "layout/footer";
 
-// Animation styles***
-@import "_base/_animation";
+// Animation styles ***
+@import "base/animation";
 
 // Responsive styles ***
-@import "_base/_responsive";
+@import "base/responsive";
+

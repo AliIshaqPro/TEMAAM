@@ -12,7 +12,7 @@
     <!-- Favicon and Icons -->
     <%= favicon_link_tag 'icon.png', rel: 'icon', type: 'image/png' %>
     <%= favicon_link_tag 'icon.png', rel: 'apple-touch-icon' %>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
 
     <!-- JavaScript Import Map -->
@@ -32,6 +32,7 @@
       <!-- Magnigic popup css -->
       <link rel="stylesheet" href="assets/css/magnific-popup.css">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <!-- Animate css -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -64,7 +65,7 @@
                      <!-- User icon -->
                      <div class="user__icon">
                         <%= link_to '#0', class: 'user-icon' do %>
-                        <i class="fa-regular fa-user"></i>
+                        <i class="fa-solid fa-user"></i>
                         <% end %>
                      </div>
                      <%= link_to '#0', class: 'acc__cont' do %>
@@ -74,7 +75,7 @@
                   <!-- Cart -->
                   <div class="cart d-flex align-items-center">
                      <span class="cart__icon">
-                     <i class="fa-regular fa-cart-shopping"></i>
+                     <i class="fa-solid fa-cart-shopping"></i>
                      </span>
                      <%= link_to '#0', class: 'c__one' do %>
                      <span>$0.00</span>
@@ -105,7 +106,8 @@
                <!-- Main Menu -->
                <ul class="main-menu">
                   <li>
-                     <a href="#0">Home <i class="fa-regular fa-angle-down"></i></a>
+                     <a href="#0">Home <i class="fa-solid fa-angle-down"></i>
+                     </a>
                      <ul class="sub-menu">
                         <li class="subtwohober">
                            <%= link_to "Home One", root_path %>
@@ -125,7 +127,7 @@
                      <%= link_to "About Us", about_path %>
                   </li>
                   <li>
-                     <a href="#0">Pages <i class="fa-regular fa-angle-down"></i></a>
+                     <a href="#0">Pages <i class="fa-solid fa-angle-down"></i></a>
                      <ul class="sub-menu">
                         <li class="subtwohober">
                            <%= link_to "Shop Leftbar", shop_path %>
@@ -154,7 +156,7 @@
                      </ul>
                   </li>
                   <li>
-                     <a href="#0">Blog <i class="fa-regular fa-angle-down"></i></a>
+                     <a href="#0">Blog <i class="fa-solid fa-angle-down"></i></a>
                      <ul class="sub-menu">
                         <li class="subtwohober">
                            <%= link_to "Blog Standard", blog_path %>
@@ -293,6 +295,8 @@
          'nice-select.min', 'pace.min', 'isotope.pkgd.min', 
          'jquery.waypoints', 'script', 
          'data-turbo-track': 'reload' %>
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/swiper/9.0.0/swiper-bundle.min.js"></script>
   </body>
 </html>
