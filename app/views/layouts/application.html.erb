@@ -17,11 +17,282 @@
 
     <!-- JavaScript Import Map -->
     <%= javascript_importmap_tags %>
+    <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Odor - Vape Store WooCommerce HTML Template</title>
+      <!-- Favicon img -->
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <!-- Bootstarp min css -->
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+      <!-- All min css -->
+      <link rel="stylesheet" href="assets/css/all.min.css">
+      <!-- Swiper bundle min css -->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+      <!-- Magnigic popup css -->
+      <link rel="stylesheet" href="assets/css/magnific-popup.css">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <!-- Animate css -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link rel="stylesheet" href="assets/css/animate.css">
+      <!-- Nice select css -->
+      <link rel="stylesheet" href="assets/css/nice-select.css">
+      <!-- Style css -->
+      <link rel="stylesheet" href="assets/css/style.css">
   </head>
 
   <body>
+  <!-- Header area start here -->
+      <div class="top__header pt-30 pb-30">
+         <div class="container">
+            <div class="top__wrapper">
+               <!-- Logo -->
+               <a href="/" class="main__logo">
+               <%= image_tag "logo/logo.svg", alt: "Logo" %>
+               </a>
+               <!-- Search bar -->
+               <div class="search__wrp">
+                  <%= form_tag '/search', method: :get, class: "search-form" do %>
+                  <input type="text" name="query" placeholder="Search for" aria-label="Search">
+                  <button type="submit"><i class="fa-solid fa-search"></i></button>
+                  <% end %>
+               </div>
+               <!-- Account and Cart Section -->
+               <div class="account__wrap">
+                  <div class="account d-flex align-items-center">
+                     <!-- User icon -->
+                     <div class="user__icon">
+                        <%= link_to '#0', class: 'user-icon' do %>
+                        <i class="fa-regular fa-user"></i>
+                        <% end %>
+                     </div>
+                     <%= link_to '#0', class: 'acc__cont' do %>
+                     <span>My Account</span>
+                     <% end %>
+                  </div>
+                  <!-- Cart -->
+                  <div class="cart d-flex align-items-center">
+                     <span class="cart__icon">
+                     <i class="fa-regular fa-cart-shopping"></i>
+                     </span>
+                     <%= link_to '#0', class: 'c__one' do %>
+                     <span>$0.00</span>
+                     <% end %>
+                     <span class="one">0</span>
+                  </div>
+                  <!-- Flag selection -->
+                  <div class="flag__wrap">
+                     <div class="flag">
+                        <%= image_tag "flag/us.png", alt: "US Flag" %>
+                     </div>
+                     <%= select_tag :flag, options_for_select([['USA', 0], ['Canada', 1], ['Australia', 2], ['Germany', 3]]), include_blank: true %>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Header area end here -->
+      <header class="header-section">
+         <div class="container">
+            <div class="header-wrapper">
+               <!-- Hamburger menu -->
+               <div class="header-bar d-lg-none">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+               </div>
+               <!-- Main Menu -->
+               <ul class="main-menu">
+                  <li>
+                     <a href="#0">Home <i class="fa-regular fa-angle-down"></i></a>
+                     <ul class="sub-menu">
+                        <li class="subtwohober">
+                           <%= link_to "Home One", root_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Home One Light", index_light_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Home Two", index_2_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Home Two Light", index_2_light_path %>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <%= link_to "About Us", about_path %>
+                  </li>
+                  <li>
+                     <a href="#0">Pages <i class="fa-regular fa-angle-down"></i></a>
+                     <ul class="sub-menu">
+                        <li class="subtwohober">
+                           <%= link_to "Shop Leftbar", shop_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Shop Rightbar", shop_2_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Shop Single", shop_single_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Cart Page", cart_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Checkout Page", checkout_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Register", register_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Login", login_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "404 Error", error_path %>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a href="#0">Blog <i class="fa-regular fa-angle-down"></i></a>
+                     <ul class="sub-menu">
+                        <li class="subtwohober">
+                           <%= link_to "Blog Standard", blog_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Blog Grid", blog_grid_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Blog List", blog_list_path %>
+                        </li>
+                        <li class="subtwohober">
+                           <%= link_to "Blog Single", blog_single_path %>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <%= link_to "Contact Us", contact_path %>
+                  </li>
+               </ul>
+               <!-- Shipping and Pickup Information -->
+               <div class="shipping__item d-none d-sm-flex align-items-center">
+                  <div class="menu__right d-flex align-items-center">
+                     <div class="thumb">
+                        <%= image_tag 'flag/picking.png', alt: 'Picking Up' %>
+                     </div>
+                     <div class="content">
+                        <p>Picking up?</p>
+                        <div class="items">
+                           <select class="form__select p-0">
+                              <option value="1">Select Store</option>
+                              <option value="2">Store One</option>
+                              <option value="3">Store Two</option>
+                              <option value="3">Store Three</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="menu__right d-flex align-items-center">
+                     <div class="thumb">
+                        <%= image_tag 'flag/shipping.png', alt: 'Shipping' %>
+                     </div>
+                     <div class="content">
+                        <p>Free Shipping <br> on order <strong>over $100</strong></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- Mouse cursor area start here -->
+      <div class="mouse-cursor cursor-outer"></div>
+      <div class="mouse-cursor cursor-inner"></div>
+      <!-- Mouse cursor area end here -->
+      <main>
     <%= yield %>
-    
+    <!-- Footer area start here -->
+      <footer class="footer-area bg-image" data-background="<%= image_path('footer/footer-bg.jpg') %>">
+         <div class="container">
+            <div class="footer__wrp pt-65 pb-65 bor-top bor-bottom">
+               <div class="row g-4">
+                  <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.1s" data-wow-delay=".1s">
+                     <div class="footer__item">
+                        <h4 class="footer-title">Customer Service</h4>
+                        <ul>
+                           <li><a href="contact.html"><span></span>Help Portal</a></li>
+                           <li><a href="contact.html"><span></span>Contact Us</a></li>
+                           <li><a href="error.html"><span></span>Delivery Information</a></li>
+                           <li><a href="error.html"><span></span>Click and Collect</a></li>
+                           <li><a href="error.html"><span></span>Refunds and Returns</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
+                     <div class="footer__item">
+                        <h4 class="footer-title">Get to Know Us</h4>
+                        <ul>
+                           <li><a href="about.html"><span></span>About Us</a></li>
+                           <li><a href="blog-grid.html"><span></span>News & Blog</a></li>
+                           <li><a href="error.html"><span></span>Careers</a></li>
+                           <li><a href="error.html"><span></span>Investors</a></li>
+                           <li><a href="contact.html"><span></span>Contact Us</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".3s">
+                     <div class="footer__item">
+                        <h4 class="footer-title">Vapes New Collections</h4>
+                        <ul>
+                           <li><a href="shop.html"><span></span>E-Cigarettes</a></li>
+                           <li><a href="shop.html"><span></span>Vape Pens</a></li>
+                           <li><a href="shop.html"><span></span>Pod Systems</a></li>
+                           <li><a href="shop.html"><span></span>Disposable Vapes</a></li>
+                           <li><a href="shop.html"><span></span>Nicotine Salt Devices</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
+                     <div class="footer__item newsletter">
+                        <h4 class="footer-title">Get Newsletter</h4>
+                        <div class="subscribe">
+                           <input type="email" placeholder="Your Email">
+                           <button><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                        <div class="social-icon mt-40">
+                           <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
+                           <a href="#0"><i class="fa-brands fa-twitter"></i></a>
+                           <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
+                           <a href="#0"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="footer__copy-text pt-50 pb-50">
+               <a href="index.html" class="logo d-block">
+               <%= image_tag('logo/logo.svg', alt: 'logo') %>
+               </a>
+               <p>&copy; Copyright 2023 <a href="#0" class="primary-hover">Odor</a> All Rights Reserved</p>
+               <a href="#0" class="payment d-block image">
+               <%= image_tag('icon/payment.png', alt: 'payment methods') %>
+               </a>
+            </div>
+         </div>
+      </footer>
+      <!-- Footer area end here -->
+      <!-- Back to top area start here -->
+      <div class="scroll-up">
+         <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+         </svg>
+      </div>
+      <!-- Back to top area end here -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <%= javascript_include_tag 'jquery-3.7.1.min', 'bootstrap.min', 'swiper-bundle.min', 
+         'jquery.counterup.min', 'wow.min', 'magnific-popup.min', 
+         'nice-select.min', 'pace.min', 'isotope.pkgd.min', 
+         'jquery.waypoints', 'script', 
+         'data-turbo-track': 'reload' %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/swiper/9.0.0/swiper-bundle.min.js"></script>
   </body>
 </html>

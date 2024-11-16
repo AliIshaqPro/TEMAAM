@@ -8,7 +8,9 @@ class HomeController < ApplicationController
     def checkout; end
     def contact; end
     def error; end
-    def index; end
+    def index
+      @products = Product.all
+    end
     def index_2; end
     def index_light; end
     def index_2_light; end
