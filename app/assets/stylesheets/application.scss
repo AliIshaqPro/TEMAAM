@@ -1,7 +1,32 @@
 @font-face {
     font-family: 'FontAwesome';
-    src: font-url('font-awesome/fa-solid-900.woff2') format('woff2'),
-         font-url('font-awesome/fa-regular-400.woff2') format('woff2');
+    src: font-url(asset-path('font-awesome/fa-solid-900.woff2')) format('woff2'),
+         font-url(asset-path('font-awesome/fa-regular-400.woff2')) format('woff2');
   }
   
-
+  @import "bootstrap.min";
+  @import "animate";
+  @import "magnific-popup";
+  @import "nice-select";
+  @import "swiper-bundle.min";
+  
+  // Required for loading dependencies and organizing files
+  @import "sass/abstracts/mixins";       // Include mixins first
+  @import "sass/abstracts/variables";    // Include variables
+  
+  // Base styles
+  @import "sass/base/animation";
+  @import "sass/base/responsive";
+  @import "sass/base/typography";
+  
+  // Components
+  @import "sass/components/buttons";
+  @import "sass/components/progress";
+  @import "sass/components/title";
+  
+  // Layout styles
+  @import "sass/layout";
+  
+  // Main stylesheet (ensure this is imported at the end)
+  @import "style"; 
+  
