@@ -1,10 +1,7 @@
-// app/assets/config/manifest.js
-
 //= link_tree ../images
-//= link_directory ../stylesheets .css  // This will include all CSS files in stylesheets, including those in subfolders
+//= link_directory ../stylesheets .css
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
-
 //= link jquery-3.7.1.min.js
 //= link bootstrap.min.js
 //= link swiper-bundle.min.js
