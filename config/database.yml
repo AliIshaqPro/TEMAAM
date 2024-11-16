@@ -1,4 +1,4 @@
-# SQLite configuration for development and test
+# SQLite configuration for development, test, and production
 default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -12,11 +12,7 @@ test:
   <<: *default
   database: storage/test.sqlite3
 
-# PostgreSQL configuration for production (without username or password)
+# Use SQLite in production as well
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
-  database: ali-ishaq_production
-  host: localhost  # Use localhost or your remote database server's address
+  <<: *default
+  database: storage/production.sqlite3
