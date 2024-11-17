@@ -93,7 +93,7 @@
                      <%= link_to '#0', class: 'c__one' do %>
                      <span>$0.00</span>
                      <% end %>
-                     <span class="one"><%= session[:cart].values.sum %></span>
+                     <span class="one"><%= session[:cart].present? ? session[:cart].values.sum : 0 %></span>
                   </div>
                   <!-- Flag selection -->
                   <div class="flag__wrap">
