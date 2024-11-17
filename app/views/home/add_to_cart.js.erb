@@ -1,0 +1,10 @@
+// Show a success message
+document.querySelector('.cart-notification').innerText = "Product added to cart!";
+document.querySelector('.cart-notification').style.display = "block";
+
+// Optionally update the cart count (assuming you have an element with class 'cart-count')
+const cartCountElement = document.querySelector('.cart-count');
+if (cartCountElement) {
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + 1; // Increment cart count
+}

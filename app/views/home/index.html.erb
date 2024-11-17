@@ -244,99 +244,113 @@
                <div class="tab-content">
                   <div id="latest-item" class="tab-pane fade show active">
                      <div class="row g-4">
-                        <div class="row">
-                           <% @products.each do |product| %>
-                           <div class="col-xxl-3 col-xl-4 col-md-6 mb-4">
-                              <!-- Added mb-4 for margin-bottom -->
-                              <div class="product__item bor mb-4">
-                                 <!-- Added mb-4 for margin-bottom -->
-                                 <!-- Wishlist Icon -->
-                                 <a href="#0" class="wishlist"><i class="fa-solid fa-heart"></i></a>
-                                 <!-- Product Image -->
-                                 <a href="shop-single.html" class="product__image pt-20 d-block">
-                                 <% if product.image_front.attached? %>
-                                 <%= image_tag product.image_front, class: 'font-image', alt: product.name %>
-                                 <% else %>
-                                 <%= image_tag "placeholder.png", class: 'font-image', alt: "Placeholder" %>
-                                 <% end %>
-                                 <% if product.image_back.attached? %>
-                                 <%= image_tag product.image_back, class: 'back-image', alt: product.name %>
-                                 <% else %>
-                                 <%= image_tag "placeholder.png", class: 'back-image', alt: "Placeholder" %>
-                                 <% end %>
-                                 </a>
-                                 <!-- Product Content -->
-                                 <div class="product__content">
-                                    <h4 class="mb-15">
-                                       <a class="primary-hover" href="shop-single.html"><%= product.name %></a>
-                                    </h4>
-                                    <del>$<%= product.original_price %></del>
-                                    <span class="primary-color ml-10">$<%= product.price %></span>
-                                    <div class="star mt-20">
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                    </div>
-                                 </div>
-                                 <!-- Add to Cart -->
-                                 <a class="product__cart d-block bor-top" href="#0">
-                                 <i class="fa-solid fa-cart-shopping primary-color me-1"></i>
-                                 <span>Add to cart</span>
-                                 </a>
-                              </div>
+                     <div class="row">
+                     <% @products.each do |product| %>
+                       <div class="col-xxl-3 col-xl-4 col-md-6 mb-4">
+                         <div class="product__item bor mb-4">
+                           <!-- Wishlist Icon -->
+                           <a href="#0" class="wishlist"><i class="fa-solid fa-heart"></i></a>
+                   
+                           <!-- Product Image -->
+                           <a href="shop-single.html" class="product__image pt-20 d-block">
+                             <% if product.image_front.attached? %>
+                               <%= image_tag product.image_front, class: 'font-image', alt: product.name %>
+                             <% else %>
+                               <%= image_tag "placeholder.png", class: 'font-image', alt: "Placeholder" %>
+                             <% end %>
+                   
+                             <% if product.image_back.attached? %>
+                               <%= image_tag product.image_back, class: 'back-image', alt: product.name %>
+                             <% else %>
+                               <%= image_tag "placeholder.png", class: 'back-image', alt: "Placeholder" %>
+                             <% end %>
+                           </a>
+                   
+                           <!-- Product Content -->
+                           <div class="product__content">
+                             <h4 class="mb-15">
+                               <a class="primary-hover" href="shop-single.html"><%= product.name %></a>
+                             </h4>
+                             <del>$<%= product.original_price %></del>
+                             <span class="primary-color ml-10">$<%= product.price %></span>
+                   
+                             <div class="star mt-20">
+                               <i class="fa-solid fa-star"></i>
+                               <i class="fa-solid fa-star"></i>
+                               <i class="fa-solid fa-star"></i>
+                               <i class="fa-solid fa-star"></i>
+                               <i class="fa-solid fa-star"></i>
+                             </div>
                            </div>
-                           <% end %>
-                        </div>
+                   
+                           <%= form_with url: add_to_cart_path, method: :post, local: true do |form| %>
+                              <%= form.hidden_field :product_id, value: product.id %>
+                              <%= form.hidden_field :quantity, value: 1 %>
+                              <button type="submit" class="product__cart d-block">
+                                <i class="fa-solid fa-cart-shopping primary-color me-1"></i>
+                                <span>Add to cart</span>
+                              </button>
+                            <% end %> 
+                            
+                         </div>
+                       </div>
+                     <% end %>
+                   </div>                   
                      </div>
                   </div>
                   <div id="top-ratting" class="tab-pane fade">
                      <div class="row g-4">
                         <div class="row">
-                           <% @products.each do |product| %>
+                        <% @products.each do |product| %>
                            <div class="col-xxl-3 col-xl-4 col-md-6 mb-4">
-                              <!-- Added mb-4 for margin-bottom -->
-                              <div class="product__item bor mb-4">
-                                 <!-- Added mb-4 for margin-bottom -->
-                                 <!-- Wishlist Icon -->
-                                 <a href="#0" class="wishlist"><i class="fa-solid fa-heart"></i></a>
-                                 <!-- Product Image -->
-                                 <a href="shop-single.html" class="product__image pt-20 d-block">
+                             <div class="product__item bor mb-4">
+                               <!-- Wishlist Icon -->
+                               <a href="#0" class="wishlist"><i class="fa-solid fa-heart"></i></a>
+                       
+                               <!-- Product Image -->
+                               <a href="shop-single.html" class="product__image pt-20 d-block">
                                  <% if product.image_front.attached? %>
-                                 <%= image_tag product.image_front, class: 'font-image', alt: product.name %>
+                                   <%= image_tag product.image_front, class: 'font-image', alt: product.name %>
                                  <% else %>
-                                 <%= image_tag "placeholder.png", class: 'font-image', alt: "Placeholder" %>
+                                   <%= image_tag "placeholder.png", class: 'font-image', alt: "Placeholder" %>
                                  <% end %>
+                       
                                  <% if product.image_back.attached? %>
-                                 <%= image_tag product.image_back, class: 'back-image', alt: product.name %>
+                                   <%= image_tag product.image_back, class: 'back-image', alt: product.name %>
                                  <% else %>
-                                 <%= image_tag "placeholder.png", class: 'back-image', alt: "Placeholder" %>
+                                   <%= image_tag "placeholder.png", class: 'back-image', alt: "Placeholder" %>
                                  <% end %>
-                                 </a>
-                                 <!-- Product Content -->
-                                 <div class="product__content">
-                                    <h4 class="mb-15">
-                                       <a class="primary-hover" href="shop-single.html"><%= product.name %></a>
-                                    </h4>
-                                    <del>$<%= product.original_price %></del>
-                                    <span class="primary-color ml-10">$<%= product.price %></span>
-                                    <div class="star mt-20">
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                    </div>
+                               </a>
+                       
+                               <!-- Product Content -->
+                               <div class="product__content">
+                                 <h4 class="mb-15">
+                                   <a class="primary-hover" href="shop-single.html"><%= product.name %></a>
+                                 </h4>
+                                 <del>$<%= product.original_price %></del>
+                                 <span class="primary-color ml-10">$<%= product.price %></span>
+                       
+                                 <div class="star mt-20">
+                                   <i class="fa-solid fa-star"></i>
+                                   <i class="fa-solid fa-star"></i>
+                                   <i class="fa-solid fa-star"></i>
+                                   <i class="fa-solid fa-star"></i>
+                                   <i class="fa-solid fa-star"></i>
                                  </div>
-                                 <!-- Add to Cart -->
-                                 <a class="product__cart d-block bor-top" href="#0">
-                                 <i class="fa-solid fa-cart-shopping primary-color me-1"></i>
-                                 <span>Add to cart</span>
-                                 </a>
-                              </div>
+                               </div>
+                       
+                               <%= form_with url: add_to_cart_path, method: :post, local: true do |form| %>
+                                  <%= form.hidden_field :product_id, value: product.id %>
+                                  <%= form.hidden_field :quantity, value: 1 %>
+                                  <button type="submit" class="product__cart d-block">
+                                    <i class="fa-solid fa-cart-shopping primary-color me-1"></i>
+                                    <span>Add to cart</span>
+                                  </button>
+                                <% end %> 
+                                
+                             </div>
                            </div>
-                           <% end %>
+                         <% end %>
                         </div>
                      </div>
                   </div>
@@ -344,48 +358,55 @@
                      <div class="row g-4">
                         <div class="row">
                            <% @products.each do |product| %>
-                           <div class="col-xxl-3 col-xl-4 col-md-6 mb-4">
-                              <!-- Added mb-4 for margin-bottom -->
-                              <div class="product__item bor mb-4">
-                                 <!-- Added mb-4 for margin-bottom -->
-                                 <!-- Wishlist Icon -->
-                                 <a href="#0" class="wishlist"><i class="fa-solid fa-heart"></i></a>
-                                 <!-- Product Image -->
-                                 <a href="shop-single.html" class="product__image pt-20 d-block">
-                                 <% if product.image_front.attached? %>
-                                 <%= image_tag product.image_front, class: 'font-image', alt: product.name %>
-                                 <% else %>
-                                 <%= image_tag "placeholder.png", class: 'font-image', alt: "Placeholder" %>
-                                 <% end %>
-                                 <% if product.image_back.attached? %>
-                                 <%= image_tag product.image_back, class: 'back-image', alt: product.name %>
-                                 <% else %>
-                                 <%= image_tag "placeholder.png", class: 'back-image', alt: "Placeholder" %>
-                                 <% end %>
-                                 </a>
-                                 <!-- Product Content -->
-                                 <div class="product__content">
-                                    <h4 class="mb-15">
-                                       <a class="primary-hover" href="shop-single.html"><%= product.name %></a>
-                                    </h4>
-                                    <del>$<%= product.original_price %></del>
-                                    <span class="primary-color ml-10">$<%= product.price %></span>
-                                    <div class="star mt-20">
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                    </div>
-                                 </div>
-                                 <!-- Add to Cart -->
-                                 <a class="product__cart d-block bor-top" href="#0">
-                                 <i class="fa-solid fa-cart-shopping primary-color me-1"></i>
-                                 <span>Add to cart</span>
-                                 </a>
-                              </div>
+                       <div class="col-xxl-3 col-xl-4 col-md-6 mb-4">
+                         <div class="product__item bor mb-4">
+                           <!-- Wishlist Icon -->
+                           <a href="#0" class="wishlist"><i class="fa-solid fa-heart"></i></a>
+                   
+                           <!-- Product Image -->
+                           <a href="shop-single.html" class="product__image pt-20 d-block">
+                             <% if product.image_front.attached? %>
+                               <%= image_tag product.image_front, class: 'font-image', alt: product.name %>
+                             <% else %>
+                               <%= image_tag "placeholder.png", class: 'font-image', alt: "Placeholder" %>
+                             <% end %>
+                   
+                             <% if product.image_back.attached? %>
+                               <%= image_tag product.image_back, class: 'back-image', alt: product.name %>
+                             <% else %>
+                               <%= image_tag "placeholder.png", class: 'back-image', alt: "Placeholder" %>
+                             <% end %>
+                           </a>
+                   
+                           <!-- Product Content -->
+                           <div class="product__content">
+                             <h4 class="mb-15">
+                               <a class="primary-hover" href="shop-single.html"><%= product.name %></a>
+                             </h4>
+                             <del>$<%= product.original_price %></del>
+                             <span class="primary-color ml-10">$<%= product.price %></span>
+                   
+                             <div class="star mt-20">
+                               <i class="fa-solid fa-star"></i>
+                               <i class="fa-solid fa-star"></i>
+                               <i class="fa-solid fa-star"></i>
+                               <i class="fa-solid fa-star"></i>
+                               <i class="fa-solid fa-star"></i>
+                             </div>
                            </div>
-                           <% end %>
+                   
+                           <%= form_with url: add_to_cart_path, method: :post, local: true do |form| %>
+                              <%= form.hidden_field :product_id, value: product.id %>
+                              <%= form.hidden_field :quantity, value: 1 %>
+                              <button type="submit" class="product__cart d-block">
+                                <i class="fa-solid fa-cart-shopping primary-color me-1"></i>
+                                <span>Add to cart</span>
+                              </button>
+                            <% end %> 
+                            
+                         </div>
+                       </div>
+                     <% end %>
                         </div>
                      </div>
                   </div>

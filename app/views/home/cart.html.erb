@@ -1,55 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+/* General styling for the cart items */
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
 
+.product-details {
+  display: flex;
+  align-items: center;
+  flex: 2;
+}
+
+.product-details img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.product-price, 
+.product-quantity, 
+.product-line-price, 
+.product-removal {
+  flex: 1;
+  text-align: center;
+}
+
+.product-quantity input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+}
+
+.product-removal button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.product-removal button:hover {
+  background: #e60000;
+}
+
+/* MOBILE SPECIFIC STYLING */
+@media screen and (max-width: 768px) {
+  .product {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .product-details {
+    flex: 1;
+    margin-bottom: 10px; /* Add spacing between sections */
+  }
+
+  .product-details img {
+    margin-right: 10px; /* Reduce margin for smaller screens */
+  }
+
+  .product-price,
+  .product-line-price {
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Take full width */
+    margin-bottom: 5px;
+  }
+
+  .product-quantity,
+  .product-removal {
+    text-align: left; /* Align text/buttons to the left */
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .product-quantity input {
+    width: 80px; /* Slightly larger input field */
+  }
+
+  .product-removal button {
+    padding: 8px 12px; /* Adjust button size for mobile */
+  }
+}
+
+</style>
 <body>
 
-
-    <!-- Sidebar area start here -->
-    <div id="targetElement" class="side_bar slideInRight side_bar_hidden">
-        <div class="side_bar_overlay"></div>
-        <div class="logo mb-30">
-            <img src="assets/images/logo/logo.svg" alt="logo">
-        </div>
-        <p class="text-justify">The foundation of any road is the subgrade, which provides a stable base for the road
-            layers above. Proper compaction of
-            the subgrade is crucial to prevent settling and ensure long-term road stability.</p>
-        <ul class="info py-4 mt-65 bor-top bor-bottom">
-            <li><i class="fa-solid primary-color fa-location-dot"></i> <a href="#0">example@example.com</a>
-            </li>
-            <li class="py-4"><i class="fa-solid primary-color fa-phone-volume"></i> <a href="tel:+912659302003">+91 2659
-                    302 003</a>
-            </li>
-            <li><i class="fa-solid primary-color fa-paper-plane"></i> <a href="#0">info.company@gmail.com</a></li>
-        </ul>
-        <div class="social-icon mt-65">
-            <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#0"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#0"><i class="fa-brands fa-instagram"></i></a>
-        </div>
-        <button id="closeButton" class="text-white"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <!-- Sidebar area end here -->
-
-    <!-- Preloader area start -->
-    <div class="loading">
-        <span class="text-capitalize">L</span>
-        <span>o</span>
-        <span>a</span>
-        <span>d</span>
-        <span>i</span>
-        <span>n</span>
-        <span>g</span>
-    </div>
-
-    <div id="preloader">
-    </div>
-    <!-- Preloader area end -->
-
-    <!-- Mouse cursor area start here -->
-    <div class="mouse-cursor cursor-outer"></div>
-    <div class="mouse-cursor cursor-inner"></div>
-    <!-- Mouse cursor area end here -->
 
 
     <main>
@@ -80,92 +123,33 @@
                         <label class="product-line-price">Total</label>
                         <label class="product-removal">Edit</label>
                     </div>
+                    <% session[:cart] ||= {} %> <!-- Ensure session[:cart] is an empty hash if not already initialized -->
 
-                    <div class="product p-4 bor-top bor-bottom d-flex justify-content-between align-items-center">
+                    <% session[:cart].each do |product_id, quantity| %>
+                      <% product = Product.find(product_id) %>
+                      <div class="product p-4 bor-top bor-bottom d-flex justify-content-between align-items-center">
                         <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/01.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">NebulaVape</h4>
+                          <%= image_tag product.image_front, class: 'font-image', alt: product.name %>
+                          <h4 class="ps-4 text-capitalize"><%= product.name %></h4>
                         </div>
-                        <div class="product-price">12.99</div>
+                        <div class="product-price"><%= number_to_currency(product.price) %></div>
                         <div class="product-quantity">
-                            <input type="number" value="2" min="1">
+                          <%= form_with url: update_cart_path, method: :post, local: true do |form| %>
+                            <%= form.number_field :quantity, value: quantity, min: 1, class: "quantity-input" %>
+                            <%= form.hidden_field :product_id, value: product.id %>
+                            <%= form.submit "Update", class: "btn btn-primary" %>
+                          <% end %>
                         </div>
-                        <div class="product-line-price">25.98</div>
+                        <div class="product-line-price"><%= number_to_currency(product.price * quantity) %></div>
                         <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
+                          <%= button_to "Remove", remove_from_cart_path(product_id: product.id), method: :delete, class: "remove-product" %>
                         </div>
-                    </div>
+                      </div>
+                    <% end %>
+                    
+                      
 
-                    <div class="product p-4 bor-bottom d-flex justify-content-between align-items-center">
-                        <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/02.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">VaporRift</h4>
-                        </div>
-                        <div class="product-price">50.00</div>
-                        <div class="product-quantity">
-                            <input type="number" value="1" min="1">
-                        </div>
-
-                        <div class="product-line-price">50.00</div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product p-4 bor-bottom d-flex justify-content-between align-items-center">
-                        <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/03.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">ZenithVapor</h4>
-                        </div>
-                        <div class="product-price">45.99</div>
-                        <div class="product-quantity">
-                            <input type="number" value="1" min="1">
-                        </div>
-
-                        <div class="product-line-price">45.99</div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product p-4 bor-bottom d-flex justify-content-between align-items-center">
-                        <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/04.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">GravityGlide</h4>
-                        </div>
-                        <div class="product-price">99.99</div>
-                        <div class="product-quantity">
-                            <input type="number" value="2" min="1">
-                        </div>
-
-                        <div class="product-line-price">199.99</div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product p-4 d-flex justify-content-between align-items-center">
-                        <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/02.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">VortexVape
-                            </h4>
-                        </div>
-                        <div class="product-price">25.98</div>
-                        <div class="product-quantity">
-                            <input type="number" value="1" min="1">
-                        </div>
-                        <div class="product-line-price">25.98</div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
-                        </div>
-                    </div>
+                   
 
                     <div class="totals">
                         <div class="totals-item theme-color float-end mt-20">
@@ -178,90 +162,31 @@
                 <!-- shopping-cart-mobile -->
                 <div class="shopping-cart mobile-view bor sub-bg">
 
-                    <div class="product p-4 bor-top bor-bottom">
-                        <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/01.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">VortexVape</h4>
-                        </div>
-                        <div class="product-price">12.99</div>
-                        <div class="product-quantity">
-                            <input type="number" value="2" min="1">
-                        </div>
-                        <div class="product-line-price">25.98</div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="product p-4 bor-bottom">
-                        <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/02.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">EnigmaVapor</h4>
-                        </div>
-                        <div class="product-price">50.00</div>
-                        <div class="product-quantity">
-                            <input type="number" value="1" min="1">
-                        </div>
-
-                        <div class="product-line-price">50.00</div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product p-4 bor-bottom">
-                        <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/03.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">ZenithVapor</h4>
-                        </div>
-                        <div class="product-price">45.99</div>
-                        <div class="product-quantity">
-                            <input type="number" value="1" min="1">
-                        </div>
-
-                        <div class="product-line-price">45.99</div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product p-4 bor-bottom">
-                        <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/04.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">RadiantVape</h4>
-                        </div>
-                        <div class="product-price">99.99</div>
-                        <div class="product-quantity">
-                            <input type="number" value="2" min="1">
-                        </div>
-
-                        <div class="product-line-price">199.99</div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product p-4">
-                        <div class="product-details d-flex align-items-center">
-                            <img src="assets/images/shop/02.jpg" alt="image">
-                            <h4 class="ps-4 text-capitalize">SerenitySmoke</h4>
-                        </div>
-                        <div class="product-price">25.98</div>
-                        <div class="product-quantity">
-                            <input type="number" value="1" min="1">
-                        </div>
-                        <div class="product-line-price">25.98</div>
-                        <div class="product-removal">
-                            <button class="remove-product">
-                                <i class="fa-solid fa-x heading-color"></i>
-                            </button>
-                        </div>
-                    </div>
+                <% if @products.present? %>
+  <% @products.each do |product| %>
+    <% quantity = session[:cart][product.id.to_s] %>
+    <div class="product p-4 bor-bottom d-flex justify-content-between align-items-center">
+      <div class="product-details d-flex align-items-center">
+        <%= image_tag product.image_front, class: 'font-image', alt: product.name %>
+        <h4 class="ps-4 text-capitalize"><%= product.name %></h4>
+      </div>
+      <div class="product-price"><%= number_to_currency(product.price) %></div>
+      <div class="product-quantity">
+        <%= form_with url: update_cart_path, method: :post, local: true do |form| %>
+          <%= form.number_field :quantity, value: quantity, min: 1, class: "quantity-input" %>
+          <%= form.hidden_field :product_id, value: product.id %>
+          <%= form.submit "Update", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      <div class="product-line-price"><%= number_to_currency(product.price * quantity) %></div>
+      <div class="product-removal">
+        <%= button_to "Remove", remove_from_cart_path(product_id: product.id), method: :delete, class: "remove-product btn btn-danger" %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>Your cart is empty. <a href="<%= root_path %>">Continue shopping</a>.</p>
+<% end %>
 
                     <div class="totals">
                         <div class="totals-item theme-color float-end">

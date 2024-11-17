@@ -15,19 +15,24 @@ Rails.application.routes.draw do
   # Define routes for each view
   get "about", to: "home#about"
   get "blog", to: "home#blog"
-  get "blog_grid", to: "home#blog_grid"
-  get "blog_list", to: "home#blog_list"
-  get "blog_single", to: "home#blog_single"
+  get "blog-grid", to: "home#blog-grid"
+  get "blog-list", to: "home#blog-list"
+  get "blog-single", to: "home#blog-single"
   get "cart", to: "home#cart"
   get "checkout", to: "home#checkout"
   get "contact", to: "home#contact"
   get "error", to: "home#error"
-  get "index_2", to: "home#index_2"
+  get "index-2", to: "home#index-2"
   get "index-light", to: "home#index-light"
-  get "index_2_light", to: "home#index_2_light"
+  get "index-2-light", to: "home#index-2-light"
   get "login", to: "home#login"
   get "register", to: "home#register"
   get "shop", to: "home#shop"
-  get "shop_2", to: "home#shop_2"
+  get "shop-2", to: "home#shop-2"
   get "shop_single", to: "home#shop_single"
+  
+  post '/cart/add', to: 'home#add_to_cart', as: 'add_to_cart'
+  resources :products, only: [:show, :destroy]
+ post '/cart/update', to: 'home#update_cart', as: 'update_cart'
+  delete '/cart/remove', to: 'home#remove_from_cart', as: 'remove_from_cart'
 end

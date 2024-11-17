@@ -41,9 +41,22 @@
       <link rel="stylesheet" href="assets/css/nice-select.css">
       <!-- Style css -->
       <link rel="stylesheet" href="assets/css/style.css">
+      <style>.cart-notification {
+         transition: opacity 0.5s ease;
+       }
+       
+       .cart-notification.hide {
+         opacity: 0;
+         display: none !important;
+       }
+       </style>
   </head>
 
   <body>
+  <div class="cart-notification" style="display: none; background: #4caf50; color: white; padding: 10px; position: fixed; top: 20px; right: 20px; border-radius: 5px;">
+  Product added to cart!
+</div>
+
   <!-- Header area start here -->
       <div class="top__header pt-30 pb-30">
          <div class="container">
@@ -80,7 +93,7 @@
                      <%= link_to '#0', class: 'c__one' do %>
                      <span>$0.00</span>
                      <% end %>
-                     <span class="one">0</span>
+                     <span class="one"><%= session[:cart].values.sum %></span>
                   </div>
                   <!-- Flag selection -->
                   <div class="flag__wrap">
@@ -143,7 +156,7 @@
                            <%= link_to "Shop Rightbar", shop_2_path %>
                         </li>
                         <li class="subtwohober">
-                           <%= link_to "Shop Single", shop_single_path %>
+                        <%= link_to "Shop Single", shop_single_path %>
                         </li>
                         <li class="subtwohober">
                            <%= link_to "Cart Page", cart_path %>
